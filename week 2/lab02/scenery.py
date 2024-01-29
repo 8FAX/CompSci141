@@ -2,8 +2,14 @@ import turtle as tur
 import math as mat
 import random as ran
 
-# The class "data" initializes with attributes for counting oak and pine, as well as a position
-# attribute.
+# Note for the SLI!
+# The Prof has told me that for q_house = N that its is OK that i use 3 trees rather then 2
+# She has also told me that i do not need to comment precondition: and postcondition: when they are Null. 
+# So when there is no pre/post condition in the comments that means there is none. 
+
+
+# # The class "data" initializes with attributes for counting oak and pine, as well as a position
+# # attribute.
 class data:
     def __init__(self):
         self.oak_count = 0
@@ -20,13 +26,8 @@ oak_max = 150
 pi = mat.pi
 pine_h = ran.randint( min, pine_max )
 oak_h = ran.randint( min, oak_max )
-oak_c = 0
-pine_c = 0
-oak_ink = (oak_h * 2.8) * oak_c
-pine_ink = (0.8*pi* pine_h + pine_h) * pine_c
 house_ink = (100 * 3) + (70.12 * 2)
 base_ink = 500
-total_ink = oak_ink + pine_ink + house_ink + base_ink
 
 def setup():
     """
@@ -40,7 +41,7 @@ def base():
     """
     The function draws a green line of length 500 and then a black line of length 400 in the opposite
     direction.
-    
+    postcondition: tur.backward(400) / put the tur at the start of the first tree on the ground line
     """
     tur.down()
     tur.pencolor('GREEN')
@@ -78,6 +79,8 @@ def house(q_color):
     The function draws a house with a specified color.
     @param q_color () - The parameter `q_color` is used to specify the color of the house.
     
+    Precondition: q_color must be a real color! (also works with hex)
+    postcondition: picks up the tur, sets the pen to black and puts the tur at the right most edge of the house
     """
     tur.down()
     tur.pencolor(q_color)
@@ -107,6 +110,8 @@ def pine_reset():
     """
     The function `pine_reset` moves the turtle up, right, forward, left, and sets the pen color to
     black.
+
+    postcondition: picks up the tur, sets the pen to black and puts the tur at the base of tree
     
     """
     tur.up()
@@ -117,22 +122,23 @@ def pine_reset():
 
 def oak_reset():
     """
-    The function `oak_reset` moves the turtle up, right, forward, left, changes the pen color to black,
-    and increments the global variable `oak_c` by 1.
+    The function `oak_reset` moves the turtle up, right, forward, left, and changes the pen color to
+    black.
     
+    postcondition: picks up the tur, sets the pen to black and puts the tur at the base of tree
     """
     tur.up()
     tur.right(90)
     tur.forward(oak_h)
     tur.left(90)
     tur.pencolor('black')
-    global oak_c
-    oak_c += 1
 
 def pine():
     """
     The function "pine" draws a pine tree using the turtle module in Python.
+    Adds 1 to  data_count.pine_count each time it is called to keep track of the number of trees the function `random_tree` uses
     
+    postcondition: calls 'pine_reset()' to reset the turtle back to the base of tree with pen up and set to back
     """
     tur.pencolor('green')
     tur.left(90)
@@ -145,13 +151,14 @@ def pine():
     tur.left(120)
     tur.forward(0.3 * pine_h)
     pine_reset()
-    global pine_c
     data_count.pine_count += 1
 
 def oak():
     """
     The function `oak()` draws a green oak tree using the turtle graphics module in Python.
-    
+    Adds 1 to  data_count.oak_count each time it is called to keep track of the number of trees the function `random_tree` uses
+
+    postcondition: calls 'oak_reset()' to reset the turtle back to the base of tree with pen up and set to back
     """
     tur.pencolor('green')
     tur.down()
@@ -175,6 +182,7 @@ def pos():
     The function `pos()` prompts the user to enter a position (1, 2, or 3) and stores it in the variable
     `q_pos`.
     
+    postcondition: `q_pos` is now a known vaild number
     """
     try:
         q_pos = int(input("What position would you like it? 1/2/3: "))
@@ -193,7 +201,7 @@ def main():
     The main function prompts the user if they want a house, and if so, asks for the color and then
     proceeds to draw the house and trees, calculating the total ink used. If the user doesn't want a
     house, it draws trees and calculates the ink used for the trees only.
-    
+
     """
     setup()
     q_house = str.upper(input("Would you like a house? y/n: "))
@@ -256,7 +264,7 @@ if __name__ == '__main__':
     The code `if __name__ == '__main__':` is a common idiom used in Python to check if the current
     script is being run as the main module or if it is being imported as a module into another script.
     
-    Author - 8FA
+    Author - Liam Scott
     Last update - 01/29/2024
     
     """
