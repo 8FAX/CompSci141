@@ -1,0 +1,45 @@
+import turtle as t
+
+def bow3(h):
+    bow(h)
+    t.left(30)
+    t.forward(2*h)
+    bow2(h/3)
+    t.backward(2*h)
+    t.left(120)
+    t.forward(2*h)
+    t.right(180)
+    bow2(h/3)
+    t.right(180)
+    t.backward(2*h)
+    t.right(150)
+
+def bow2(h):
+    bow(h)
+    t.left(30)
+    t.forward(2*h)
+    bow(h/3)
+    t.backward(2*h)
+    t.left(120)
+    t.forward(2*h)
+    bow(h/3)
+    t.backward(2*h)
+    t.right(150)
+
+def bow(h):
+    t.pendown()
+    t.left(30)
+    t.forward(h)
+    t.right(120)
+    t.forward(h)
+    t.right(120)
+    t.forward(2*h)
+    t.left(120)
+    t.forward(h)
+    t.left(120)
+    t.forward(h)
+    t.right(30)
+    t.penup()
+
+bow3(100)
+t.done()
