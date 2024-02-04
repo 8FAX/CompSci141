@@ -119,14 +119,17 @@ def main():
     Last update - 02/04/2024
     
     """
-    # depth = int(input("Enter the depth: "))
-    # size = int(input("Enter the size of the bows: "))
-    # color1 = input("Enter outline color for the bows: ")
-    # color2 = input("Enter fill color for the bows: ")
-    color1 = "green"
-    color2 = "blue"
-    depth = 5
-    size = 100
+    depth = int(input("Enter the depth: "))
+    size = int(input("Enter the size of the bows: "))
+    color1 = input("Enter outline color for the bows: ")
+    color2 = input("Enter fill color for the bows: ")
+
+    #for quick use comment out the inmput above ^ and uncomment the vars below!
+
+    # color1 = "green"
+    # color2 = "blue"
+    # depth = 5
+    # size = 100
     setup(size)
     bow3(size, depth, color1, color2)
     t.done()
