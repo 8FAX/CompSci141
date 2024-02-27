@@ -1,9 +1,5 @@
 import turtle as t
 import meteo as met
-Wether_format_string = []
-
-def clean_aray():
-    del Wether_format_string[:]
 
 def get_num(weather):
     new_str = ""
@@ -13,56 +9,107 @@ def get_num(weather):
         else:
             break
     return int(new_str) 
+
+def white_box():
+    t.fillcolor("white")
+    t.pencolor("white")
+    t.begin_fill()
+    t.down()
+    t.forward(36)
+    t.right(90)
+    t.forward(16)
+    t.right(90)
+    t.forward(36)
+    t.right(90)
+    t.forward(16)   
+    t.right(90)
+    t.end_fill()
+    t.up()
+    t.pencolor("black")    
+
+def splicer(weather_string):
+    x_cord = 0
+    y_cord = 0
+
+    if weather_string[0] in ['S', 'P', 'C', 'R', 'W']:
+        map_mark_up(weather_string[0], x_cord, y_cord)
+        main_splicer(weather_string[1:])
+            
+    if weather_string[0] == 'T' or weather_string[0] == 'A':
+        number = get_num(weather_string[1:]) 
+        map_mark_up(weather_string[0]+str(number), x_cord, y_cord)
+        main_splicer(weather_string[1+ len(str(number)):])
+    else:
+        main_splicer(weather_string)
+
         
-        
-def splicer(weather):
+def main_splicer(weather_string):
     i = 0
     x_cord = 0
     y_cord = 0
-    if weather[i]=="S":
-        i+=1
-        Wether_format_string.insert(0,"S")
-    if weather[i]=="P":
-        i+=1
-        Wether_format_string.insert(0,"P")
-    if weather[i]=="C":
-        i+=1
-        Wether_format_string.insert(0,"C")
-       
-    if weather[i]=="G":
-        i+=1
-        x_cord = get_num(weather[i:])
-        i += len(str(x_cord)) + 1
-        y_cord = get_num(weather[i:])
-        Wether_format_string.insert(1,x_cord)
-        Wether_format_string.insert(2,y_cord)
-        return
 
-def go_to():
+    while i < len(weather_string):
+        if weather_string[i] == "G":
+            i += 1
+            x_cord = get_num(weather_string[i:])
+            i += len(str(x_cord)) + 1
+            y_cord = get_num(weather_string[i:])
+            print(f"i is {i} ")
+            i += len(str(y_cord))
+        if i == len(weather_string):
+            break
+        if weather_string[i] in ['S', 'P', 'C', 'R', 'W']:
+            map_mark_up(weather_string[i], x_cord, y_cord)
+            i += 1
+        if i == len(weather_string):
+            break
+        if weather_string[i] == 'T' or weather_string[i] == 'A':
+            number = get_num(weather_string[i + 1:])
+            map_mark_up(weather_string[i] + str(number), x_cord, y_cord)
+            i += len(str(number)) + 1 
+
+def go_to(x,y):
     t.penup()
-    t.goto(Wether_format_string[1],Wether_format_string[2])
+    t.goto(x, y)
+    print(f"I am at {x}, {y}")
     t.setheading(0)
 
 
-def map_mark_up():
-    go_to()
-    if Wether_format_string[0] =="S":
+def map_mark_up(symbol, x, y):
+    go_to(x, y)
+
+    if symbol[0] == "S":
         met.draw_sun()
-    if Wether_format_string[0] =="C":
+    elif symbol[0] == "A":
+        t.pendown()
+        t.color("red")
+        rat = int(symbol[1:])
+        met.draw_circle(rat)
+    elif symbol[0] == "C":
         met.draw_cloud()
-    if Wether_format_string[0] =="P":
+    elif symbol[0] == "P":
         met.draw_sun()
         t.forward(6)
         met.draw_cloud()
-
+    elif symbol[0] == "R":
+        met.draw_rain()
+    elif symbol[0] == "W":
+        met.draw_snow()
+    elif symbol[0] == "T":
+        white_box()
+        t.right(90)
+        t.forward(16)
+        t.left(90)
+        t.forward(2)
+        t.write(symbol[1:], font=("Arial", 9))
 
 
 def main():
+
     met.background()
-    weather = input("Enter a weather string... ")
-    splicer(weather)
-    map_mark_up()
+    # weather_string = input("Enter a weather string... ")
+    splicer("RG100,100SG20.200PG10,190T50G-200,-40WG-210,-50T70G20,-200A40")
     t.done()
 
-main()
-
+if __name__ == "__main__":
+    main()

@@ -69,7 +69,7 @@ def draw_sun(r=16):
     t.end_fill()
     t.pencolor("black")
 
-    pass # YOUR CODE AND DOCSTRING  GOES HERE
+    pass 
 
 def draw_rain(size=16):
     draw_cloud(16)
@@ -100,7 +100,7 @@ def draw_rain(size=16):
     t.penup()
 
 
-    pass # YOUR CODE AND DOCSTRING  GOES HERE
+    pass 
     
 def draw_cloud(r=16):
     """
@@ -128,6 +128,13 @@ def draw_cloud(r=16):
     t.forward(2.2*r)
     t.pencolor("black")
     
+def draw_circle(R):
+    t.pencolor("Red")
+    t.pensize(3)
+    t.circle(R)
+    t.pencolor("black")
+    t.pensize(1)
+    pass
 
 def draw_snow(size=8):
     """
@@ -151,6 +158,8 @@ def draw_snow(size=8):
     t.right(135)
     snowflake(size)
     t.setheading(0)
+
+
     
 
 if __name__ == "__main__":
