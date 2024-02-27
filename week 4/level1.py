@@ -1,6 +1,8 @@
 import turtle as t
 import random
 tot = 0
+max = 500
+min = 0
 
 def random_spin():
     r = random.randint(-30, 30)
@@ -33,11 +35,19 @@ def snake_while(seg, len):
         seg -= 1
     return total_distance
 
-print(snake_tail(4,100,0))
-input("press enter to clear!")
-t.clearscreen()
-print(snake_rec(4,100))
-input("press enter to clear!")
-t.clearscreen()
-print(snake_while(4, 100))
-t.done() 
+
+
+def main():
+    seg = int(input("Enter the number of segments: "))
+    if int(seg) > max or int(seg) <= min:
+        print("Invalid input")
+        main()
+    print(snake_tail(seg,100,0))
+    input("press enter to clear!")
+    t.clearscreen()
+    print(snake_rec(seg,100))
+    input("press enter to clear!")
+    t.clearscreen()
+    print(snake_while(seg, 100))
+    t.done() 
+main()
