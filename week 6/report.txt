@@ -1,0 +1,76 @@
+1: 
+
+The purpose of the pivot in the quick select algorithm is to partition the list into two 
+sublists the first one containing elements smaller than the pivot and another containing elements larger 
+than the pivot. The choice of pivot can significantly affect the performance of the algorithm.
+
+Choosing the middle item as the pivot, as done in the original implementation and in my implementation, the advantages 
+in terms of balanced and partitioning, especially when the list is already sorted or nearly sorted. 
+However, it can still lead to inefficient partitions in certain cases, especially if the list is 
+already sorted in ascending or descending order, resulting in unbalanced partitions, and this would slow performance.
+
+let's consider what would happen if we selected the first item as the pivot instead of the middle:
+
+Worst-case Scenario: If the list is already sorted (either ascending or descending), choosing the first 
+item as the pivot would lead to the worst-case scenario where one partition would contain all elements except 
+the pivot. This would result in a time complexity of O(n^2), where n is the number of elements in the list. this would 
+be simmlar to using a sorted list with a middle pivot anyway so using the first item on a sorted list or the mid item 
+on a sorted list will be around the same.
+
+Average-case Scenario: In average cases, the choice of pivot may not matter as much. However, consistently choosing 
+the first item as the pivot could still lead to slightly unbalanced partitions, especially if the list has a specific 
+pattern or distribution of values. having unbalanced partitions will slow the algorithm down becouse we will need to do 
+more splits then nessery.
+
+2:
+
+Small Unsorted List:
+Input: [5, 2, 8, 3, 9]
+Expected Output: 5 (median)
+
+Large Unsorted List:
+Input: [100, 30, 50, 70, 90, 10, 20, 40, 60, 80]
+Expected Output: 55 (median)
+
+Sorted List (Ascending):
+Input: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Expected Output: 5.5 (median)
+
+Empty List:
+Input: []
+Expected Output: None (as there is no median for an empty list)
+
+impact of providing a sorted list on the efficiency of the quick select algorithm while the efficiency of the 
+quick select algorithm can be affected by the initial order of the list, its worst-case performance can still be 
+mitigated by selecting a pivot that helps achieve balanced partitions. However, providing a sorted list does not 
+guarantee improved efficiency and might even lead to worse performance in the worst-case scenario.
+
+3:
+
+All test were done with a 30k item data set:
+
+insertion:
+
+Test 1 
+Total time to Sort the list is 9.417717933654785 seconds
+Total time to find the best location 0.005270957946777344 seconds
+
+Test 2 
+Total time to Sort the list is 9.388230899818893 seconds
+Total time to find the best location 0.0038949879898883 seconds
+
+Test 3 
+Total time to Sort the list is 8.9827193823999321 seconds
+Total time to find the best location 0.00488298388929 seconds
+
+
+quick_select:
+
+Test 1
+Total time to find the best location 0.013470888137817383 seconds
+
+Test 2
+Total time to find the best location 0.010752201080322266 seconds
+
+Test 3
+Total time to find the best location 0.014339923858642578 seconds
