@@ -3,44 +3,54 @@ from ball_puzzle_animate import *
 
 def sort_balls(R, G, B):
     """
-    The function `sort_balls` takes three stacks representing red, green, and blue balls, and sorts the
-    balls in the stacks according to a specific order, returning the number of steps taken to sort them.
+    The function `sort_balls` sorts balls of different colors (red, green, blue) by moving them between
+    stacks while keeping track of the number of steps taken.
     
     Author - Liam Scott
     Last update - 03/28/2024
-    @param R () - The `R` parameter in the `sort_balls` function likely represents a stack of red balls.
-    The function seems to be sorting the balls based on their color (red, green, blue) by moving them
-    between different stacks (`R`, `G`, `B`) until they are sorted in
-    @param G () - The code you provided seems to be a sorting algorithm for balls of different colors
-    (red, green, and blue). The function `sort_balls` takes three stacks representing balls of red (R),
-    green (G), and blue (B) colors, and it sorts them according to a specific order
+    @param R () - The `sort_balls` function you provided seems to be sorting balls of different colors
+    (red, green, blue) using stacks. The function moves the balls according to certain rules until they
+    are sorted in the order of red, green, blue.
+    @param G () - The code you provided seems to be a function for sorting balls of different colors
+    (red, green, blue) using stacks. It looks like you are trying to move the balls in a specific order
+    based on their colors.
     @param B () - The code you provided seems to be a function that sorts balls of different colors
-    (red, green, and blue) based on certain conditions. It looks like the function is using stacks to
-    move the balls around until they are sorted in a specific order.
+    (red, green, blue) based on certain rules. The function takes three stacks representing the balls of
+    each color (R for red, G for green, B for blue) as input and sorts them according to the following
     @returns The function `sort_balls` returns the total number of steps taken to sort the balls in the
     stacks R, G, and B according to the specified rules.
     
     """
+
     steps = 0
     while not empty_stack(R):
-        ball = pop(R)
+        ball = top(R)
+        pop(R)
         if ball == 'B':
             push(B, ball)
+            animate_move([R, G, B] , 0, 2) 
         else:
             push(G, ball)
+            animate_move([R, G, B] , 0, 1)
         steps += 1
 
     while not empty_stack(G):
-        ball = pop(G)
+        ball = top(G)
+        pop(G)
+
         if ball == 'R':
             push(R, ball)
+            animate_move([R, G, B] , 1, 0)
         else:
             push(B, ball)
+            animate_move([R, G, B] , 1, 2)
         steps += 1
 
     while not empty_stack(B) and top(B) != 'B':
-        ball = pop(B)
+        ball = top(B)
+        pop(B)
         push(G, ball)
+        animate_move([R, G, B] , 2, 1)
         steps += 1
     return steps
 
@@ -51,8 +61,8 @@ def main():
     
     Author - Liam Scott
     Last update - 03/28/2024
-    @returns The `main()` function does not explicitly return any value. It simply prints out some
-    information and waits for user input before exiting.
+    @returns The `main()` function does not explicitly return any value. It prints out messages and
+    waits for user input before exiting.
     
     """
 

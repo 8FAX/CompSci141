@@ -47,6 +47,7 @@ def pop(stack):
 
     stack.nodes = stack.nodes.next
     stack.size = stack.size - 1
+    return 
 
 def empty_stack(stack):
     """
