@@ -98,6 +98,8 @@ def main():
     words = wd.readWordFile(input_file)
     letterFreq(words)
 
+# The `if __name__ == '__main__':` block in Python is a common idiom used to check whether the current
+# script is being run as the main program or if it is being imported as a module into another script.
 if __name__ == '__main__':
     main()
 
